@@ -10,7 +10,7 @@ Within R:
 `devtools::install_github("statnet/EvoNetHIV", ref = "Behavior-JOURNAL-DATE")`   
 
 ### Citation
-> Goodreau SM, Stansfield SE, Murphy JT, Peebles KC, Gottlieb GS, Abernethy NF, Herbeck JT, Mittler JE. (YEAR). ISexual network structure, HIV prevalence, and the evolution of set point viral load. JOURNAL.
+> Goodreau SM, Stansfield SE, Murphy JT, Peebles KC, Gottlieb GS, Abernethy NF, Herbeck JT, Mittler JE. (YEAR). Sexual network structure, HIV prevalence, and the evolution of set point viral load. JOURNAL.
 
 ### Abstract
 (did not insert bc repository cannot be made private)
