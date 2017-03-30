@@ -5,9 +5,9 @@ This repository contains the code to reproduce the analysis of set point viral l
 This model is written in the R programming language.  It requires [EpiModel](http://www.epimodel.org), the epidemic modeling software, to be installed first, as well as [EvoNetHIV](https://github.com/EvoNetHIV).      
 
 Within R:  
+`install.packages("EpiModel")`     
 `if(!require(devtools)) { install.packages("devtools") }`     
-`library(devtools)`      
-`devtools::install_github("statnet/EpiModel")`     
+`library(devtools)`         
 `devtools::install_github("EvoNetHIV/Goodreau_et_al_Behavior_-_SPVL")`     
 
 ### Citation
