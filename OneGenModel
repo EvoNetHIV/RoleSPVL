@@ -1,0 +1,149 @@
+
+#######################################################################################
+# Note on trans_RR_insertive_anal_msm:
+# This number is a weighted average across circumcisions statuses, as per Patel et al.
+# In this tool we do not model circumcision status explicitly, so we use this as is.
+# In Evonet proper, we use a higher number as our base (uncirc) which then gets
+# reduced for men who are circ.
+#######################################################################################
+
+#######################################################################################
+# Input parameters
+
+trans_lambda         = 0.000247
+trans_RR_LogV        = 2.89
+trans_VLbase         = 4.0
+trans_RR_insertive_anal_msm = 1.8
+trans_RR_receptive_anal_msm = 23
+popsize = 1e5                      # Size of the poz pop and size of the neg pop (total pop = 2*popsize)
+n = c(1, seq(10,90,10),
+      seq(100,900,100),
+      seq(1000,10000,1000))         # Vector of acts per person across which to run the model
+
+#trans_RR_circumcised = 0.53
+#trans_RR_uses_condoms= 0.22
+#trans_RR_age         = 0.67
+#trans_base_age       = 35
+#trans_RR_STI         = 2.7
+#trans_RR_acute_phase = 1.0
+
+#######################################################################################
+# Creating the distribution of SPVL in the donor population
+
+donorlog10SPVL <- round(rbeta(popsize,3,3)*5+2,1)
+mean(donorlog10SPVL)
+var(donorlog10SPVL)
+hist(donorlog10SPVL)
+
+SPVLs <- round(seq(min(donorlog10SPVL)-1,max(donorlog10SPVL)+1,0.1),1)
+# Creating a vectof all possible SPVL values
+
+##########################################################################
+# Calculations for receptive seronegative, each act anew
+
+meanSPVL_rec_anew <- numtrans_rec_anew <- rep(NA,length(n))
+newinfVL_rec_anew <- matrix(NA, popsize,length(n))
+for(runno in 1:length(n)) {
+  newinfVL_rec <- rep(NA, popsize)
+  for (i in 1:n[runno]) {
+    partnerSPVL <- donorlog10SPVL[sample(popsize, popsize, replace=T)]
+    transprob_rec <- exp(x =  (partnerSPVL - trans_VLbase) * log(trans_RR_LogV) + log(trans_RR_receptive_anal_msm))
+    transprob_rec <- 1 - ((1-trans_lambda)^(transprob_rec))
+    trans <- which( is.na(newinfVL_rec) & (runif(popsize) < transprob_rec))
+    newinfVL_rec[trans] <- partnerSPVL[trans]
+  }
+  meanSPVL_rec_anew[runno] <- mean(newinfVL_rec, na.rm=T)
+  numtrans_rec_anew[runno] <- sum(!is.na(newinfVL_rec))
+  newinfVL_rec_anew[, runno] <- newinfVL_rec
+  cat('Finishing run ',runno,' of ',length(n),'.\n', sep="")
+}
+
+#########################################################################
+# Calculations for insertive seronegative, each act anew
+
+meanSPVL_ins_anew <- numtrans_ins_anew <- rep(NA,length(n))
+newinfVL_ins_anew <- matrix(NA, popsize,length(n))
+for(runno in 1:length(n)) {
+  newinfVL_ins <- rep(NA, popsize)
+  for (i in 1:n[runno]) {
+    partnerSPVL <- donorlog10SPVL[sample(popsize, popsize, replace=T)]
+    transprob_ins <- exp(x =  (partnerSPVL - trans_VLbase) * log(trans_RR_LogV) +
+                           log(trans_RR_insertive_anal_msm))
+    transprob_ins <- 1 - ((1-trans_lambda)^(transprob_ins))
+    trans <- which( is.na(newinfVL_ins) & (runif(popsize) < transprob_ins))
+    newinfVL_ins[trans] <- partnerSPVL[trans]
+  }
+  meanSPVL_ins_anew[runno] <- mean(newinfVL_ins, na.rm=T)
+  numtrans_ins_anew[runno] <- sum(!is.na(newinfVL_ins))
+  newinfVL_ins_anew[, runno] <- newinfVL_ins
+  cat('Finishing run ',runno,' of ',length(n),'.\n', sep="")
+}
+
+##########################################################################
+# Calculations for receptive seronegative, each act with same partner
+
+meanSPVL_rec_same <- numtrans_rec_same <- rep(NA,length(n))
+newinfVL_rec_same <- matrix(NA, popsize,length(n))
+for(runno in 1:length(n)) {
+  newinfVL_rec <- rep(NA, popsize)
+  partnerSPVL <- donorlog10SPVL[sample(popsize, popsize, replace=F)]
+  transprob_rec <- exp(x =  (partnerSPVL - trans_VLbase) * log(trans_RR_LogV) +
+                         log(trans_RR_receptive_anal_msm))
+  transprob_rec <- 1 - ((1-trans_lambda)^(transprob_rec))
+  for (i in 1:n[runno]) {
+    trans <- which( is.na(newinfVL_rec) & (runif(popsize) < transprob_rec))
+    newinfVL_rec[trans] <- partnerSPVL[trans]
+  }
+  meanSPVL_rec_same[runno] <- mean(newinfVL_rec, na.rm=T)
+  numtrans_rec_same[runno] <- sum(!is.na(newinfVL_rec))
+  newinfVL_rec_same[, runno] <- newinfVL_rec
+  cat('Finishing run ',runno,' of ',length(n),'.\n', sep="")
+}
+
+#########################################################################
+# Calculations for insertive seronegative, each act with same partner
+
+meanSPVL_ins_same <- numtrans_ins_same <- rep(NA,length(n))
+newinfVL_ins_same <- matrix(NA, popsize,length(n))
+for(runno in 1:length(n)) {
+  newinfVL_ins <- rep(NA, popsize)
+  partnerSPVL <- donorlog10SPVL[sample(popsize, popsize, replace=F)]
+  transprob_ins <- exp(x =  (partnerSPVL - trans_VLbase) * log(trans_RR_LogV) +
+                         log(trans_RR_insertive_anal_msm))
+  transprob_ins <- 1 - ((1-trans_lambda)^(transprob_ins))
+  for (i in 1:n[runno]) {
+    trans <- which( is.na(newinfVL_ins) & (runif(popsize) < transprob_ins))
+    newinfVL_ins[trans] <- partnerSPVL[trans]
+  }
+  meanSPVL_ins_same[runno] <- mean(newinfVL_ins, na.rm=T)
+  numtrans_ins_same[runno] <- sum(!is.na(newinfVL_ins))
+  newinfVL_ins_same[, runno] <- newinfVL_ins
+  cat('Finishing run ',runno,' of ',length(n),'.\n', sep="")
+}
+
+##########################################################################
+# Compile output
+
+BOTE <- list(trans_lambda = trans_lambda,
+             trans_RR_LogV = trans_RR_LogV,
+             trans_VLbase = trans_VLbase,
+             trans_RR_insertive_anal_msm = trans_RR_insertive_anal_msm,
+             trans_RR_receptive_anal_msm = trans_RR_receptive_anal_msm,
+             popsize = popsize,
+             n=n,
+             donorlog10SPVL = donorlog10SPVL,
+             numtrans_rec_same = numtrans_rec_same,
+             numtrans_ins_same = numtrans_ins_same,
+             numtrans_rec_anew = numtrans_rec_anew,
+             numtrans_ins_anew = numtrans_ins_anew,
+             meanSPVL_rec_anew = meanSPVL_rec_anew,
+             meanSPVL_ins_anew = meanSPVL_ins_anew,
+             meanSPVL_rec_same = meanSPVL_rec_same,
+             meanSPVL_ins_same = meanSPVL_ins_same,
+             newinfVL_rec_anew = newinfVL_rec_anew,
+             newinfVL_ins_anew = newinfVL_ins_anew,
+             newinfVL_rec_same = newinfVL_rec_same,
+             newinfVL_ins_same = newinfVL_ins_same
+             )
+
+##########################################################################
