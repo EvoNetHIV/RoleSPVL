@@ -11,7 +11,7 @@ Within R:
 `devtools::install_github("EvoNetHIV/RoleSPVL")`     
 
 ### Citation
-> Stansfield SE, Mittler JE, Gottlieb GS, Murphy JT, Hamilton DT, Detels R, Wolinsky SM, Jacobson LP, Margolick JB, Rinalso CR, Herbeck JT, Goodreau SM. (submitted). Sexual role and HIV-1 set point viral load among men who have sex with men. Journal of Infectious Diseases.
+> Stansfield SE, Mittler JE, Gottlieb GS, Murphy JT, Hamilton DT, Detels R, Wolinsky SM, Jacobson LP, Margolick JB, Rinaldo CR, Herbeck JT, Goodreau SM. (submitted). Sexual role and HIV-1 set point viral load among men who have sex with men. Journal of Infectious Diseases.
 
 ### Abstract
 *Background*     
