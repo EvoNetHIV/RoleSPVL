@@ -1,3 +1,15 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
+
 plots_popsumm_multi_models<-function(model_paths,model_names,outpath,
                                      out_names,
                         nw_stats=TRUE,max_points_rep=50)

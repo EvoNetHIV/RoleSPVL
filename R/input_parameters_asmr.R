@@ -1,3 +1,15 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
+
 #' @export
 input_parameters_asmr <- function(data_name="usa_men_18_to_100",min_age,max_age)
 {

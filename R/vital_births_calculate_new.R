@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #' @export
 vital_births_calculate_new<-function(dat,at){
   #Description: calculate number of new births/additions for timestep based on birth_model parameter.

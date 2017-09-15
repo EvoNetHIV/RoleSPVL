@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #' @export
 plot_vl_trajectories <- function(model,sim=1,Therapy_Type=1,outpath=NULL,name="evomodel"){
   if(model$param[[1]]$VL_Function=="aim3"){

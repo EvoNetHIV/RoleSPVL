@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #' @export
 social_2nd_line_treatment_module <- function(dat, at)
 {

@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #' @export
 viral_update_cd4_simple_diff_eqn <- function(dat,at)
 {  

@@ -1,3 +1,15 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
+
 #' @export
 plot_disc_coital_acts_history <- function(model,outpath,sim=1,name="evomodel"){ 
   #note 10/15/15: function in draft form now (it works)

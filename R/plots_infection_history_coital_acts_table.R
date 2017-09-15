@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #removed export as it is not being called now...maybe later
 coital_acts_table_fxn <- function(model,dframe,pop,ind_inf_time,ind_inf_donor,ind,
                                   partners){

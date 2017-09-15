@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #not exported as it is not in use now...maybe later
 infection_summary_table_fxn <- function(pop,partners,dframe,ind)
 {

@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 #' @export
 transmission_hughes_and_exp<-function(dat,acute_phase_status,sti_status_sus,
                                       condom_use,msm_sus_insert_status,

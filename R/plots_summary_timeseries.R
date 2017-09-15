@@ -1,3 +1,14 @@
+#' @title Title
+#'
+#' @description Description
+#'
+#' @param x A number.
+#' @param y A number.
+#' @return return value here.
+#' @details
+#' Additional details here
+#' @examples
+#' example function call here
 
 #' @export
 plot_summary_timeseries<-function(model,outpath,name=NULL,nw_stats=TRUE)
